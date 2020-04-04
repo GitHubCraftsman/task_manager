@@ -1,0 +1,114 @@
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  background-color: #e7fdd1;
+  color: #5da860;
+  
+}
+.btn-primary {
+  color: #a4dda6;
+  background-color: #408625;
+  border-color: #166d0e;
+}
+.btn-primary:hover{
+  background: rgb(0, 174, 0) none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+}
+.glyphicon-trash:before {
+  color: #35dc17;
+}
+.glyphicon-pencil:before {
+  color: #35dc17;
+}
+
+
+select{
+  border-radius: 7px;
+  height: 33px;
+  background-color: #e7fdd1;
+}
+.col-md-3.wellcome-message.well {
+  
+  background: #e7fdd1;
+ 
+}
+.col-md-12.well {
+  
+  background: #e7fdd1;
+ 
+}
+.new_task input, .new_task select{
+  width: 100%;
+}
+#projects .panel-heading{
+  height:70px;
+}
+#projects .panel-heading .trash, #projects .panel-heading .pencil{
+  color: #fff;
+  opacity: 0.7;
+  padding-right: 10px;
+  font-size: 33px;
+  top: 11px;
+}
+#projects .panel-heading .name{
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  padding: 7px;
+}
+#projects .panel-heading .calendar{
+  font-size: 45px;
+  color: #ffffff;
+}
+#projects .panel-heading{
+  background-color: #b3fc82;
+  background-image: none;
+}
+#projects .panel-body .plus{
+  top:8px;
+  color: #b3fc82;
+  position: absolute;
+}
+td{
+  position: relative
+}
+tr.done td:before{
+	content: '';
+	position: absolute;
+  top: 38%;
+	left: 0px;
+	right: 0px;
+	height: 1px;
+	border-top: 2px solid #8bffd8;
+}
+.done{
+  color: #8bffd8;
+}
+.login-input{
+  margin: 0 auto;
+}
+.new_task_select{
+  background: #b3fc82 none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+  border: medium none;
+  width: 100%;
+}
+.new_task_select:hover{
+  background: rgb(0, 174, 0) none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+}
+.panel-body div{
+  padding: 0;
+}
+.wellcome-message{
+  text-align: right;
+}
+.panel-body #task_name{
+  margin-left: 20px;
+  width:97%;
+}
+.actions input{
+  border-radius: 7px;
+}

@@ -1,0 +1,106 @@
+<div class='container'>
+<h1 class="text-center">WELLCOME TO TASK MANAGER</h1>
+<% if user_signed_in? %>
+  <div calss='row'>
+    <div class='col-md-9'>
+      <p>SQL filter for all:</p>
+        <%= select_tag(:filter, options_for_select([['none', 'none'],
+         ['all iniq statuses', 'statuses'],
+         ['count all tasks in each project', 'count-tasks'],
+         ['count all tasks in each project order by projects name', 'count-tasks-order-name'],
+         ['tasks for all projects having the name beginning with “N” letter', 'tasks-n'],
+         ['list of all projects containing the ‘a’ letter in the middle of the name', 'projects-a'],
+         ['list of tasks with duplicate names, asc', 'tasks-dup'],
+         ['list of tasks GARAGE with mathes', 'tasks-garage'],
+         ['list of project names having more than 10 tasks in status ‘done’', 'tasks-ten-done']
+        ]), :onchange=>'filter(this)') %>
+        <br /><br />
+    </div>
+    <div class='col-md-3 wellcome-message well'>
+      <span>Hello, <%= current_user.email %></span><br>
+      <%= link_to 'Sing out', destroy_user_session_path, :method => :delete %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div id='filter-block' class='col-md-12 well' style='display:none;'></div>
+  </div>
+
+  <div id='new_project' class='text-center'>
+      <%= link_to new_project_path , remote: true, :class => "btn btn-primary"  do %>
+        <span class='glyphicon glyphicon-plus'></span> CREATE PROJECT
+    <% end %>
+  </div><br>
+
+    <div id='projects'>
+      <% @projects.each do |project| %>
+
+      <div id=<%= dom_id project %> class='panel panel-default'>
+
+          <div class='panel-heading'>
+            <div class='col-md-6'>
+              <span class="glyphicon glyphicon-calendar calendar pull-left"></span>
+              <p class='name pull-left'><%= project.name %></p>
+            </div>
+            <div class='col-md-2 col-md-offset-4'>
+              <%= link_to project_path(project), remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="glyphicon glyphicon-trash trash pull-right"></i>
+              <% end %>
+              <%= link_to edit_project_path(project), remote: true do %>
+                <i class="glyphicon glyphicon-pencil pencil pull-right"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class='panel-body' id='new_task_<%= dom_id project %>'>
+          <%= form_for([project, @task], remote: true) do |f| %>
+            <div class='col-md-8'>
+              <span class='glyphicon glyphicon-plus plus'></span><%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
+            </div>
+            <div class='col-md-2'>
+              <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]), class: 'form-control' %>
+            </div>
+            <div class='col-md-2'>
+              <%= f.submit class: 'btn btn-default new_task_select'%>
+              <% end %>
+            </div>
+          </div>
+
+            <table id='tasks_<%= dom_id project %>' class='table table-hover'>
+              <% unless project.tasks.empty? %>
+              <% project.tasks.each do |task| %>
+                <tr id=<%= dom_id task %> class='row <%= task.status %>'>
+                  <td><p><%= task.name %></p></td>
+                  <td><p><%= task.status %></p></td>
+                  <td><%= link_to edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' do %>
+                    <i class="glyphicon glyphicon-pencil pencil"></i>
+                    <% end %>
+                  </td>
+                  <td><%= link_to [task.project, task], remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                    <i class="glyphicon glyphicon-trash trash"></i>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            <% end %>
+          </table>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<% else %>
+    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>
+
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
+    </div>
+  </div>
+</div>

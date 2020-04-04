@@ -1,0 +1,5 @@
+<%= form_for :project, url: project_path(@project), method: :patch, remote: true do |f| %>
+  <p>
+    <%= f.text_field :name %>  <%= f.submit value: 'Rename project'%>
+  </p>
+<% end %>

@@ -1,0 +1,6 @@
+if (!$("table").is("#tasks_project_<%= @project.id %>")){
+  $('#project_<%= @project.id %>').append("<table id='tasks_project_<%= @project.id %>' class='table table-hover'>");
+}
+$("#new_task_project_<%= @project.id %>")
+$("<%= escape_javascript(render @task) %>").fadeIn(300).appendTo("#tasks_project_<%= @project.id %>");
+$("#new_task_project_<%= @project.id %> #task_name").val('');

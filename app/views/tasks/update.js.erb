@@ -1,0 +1,4 @@
+$("#task_<%= @task.id %>").removeClass('done');
+$("#task_<%= @task.id %>").addClass("<%= @task.status%>");
+$("#task_<%= @task.id %>").html("<%= j (render 'update') %>");
+$('#myModal').modal("hide");
