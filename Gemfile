@@ -18,9 +18,9 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'devise'
 
-#gem 'bootstrap-sass'
+gem 'bootstrap-sass'
 
-#gem 'bootstrap', '~> 4.4.1'
+gem 'bootstrap', '~> 4.4.1'
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
