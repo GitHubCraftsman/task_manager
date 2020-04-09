@@ -22,3 +22,8 @@ test:
 
 production:
    adapter: postgresql
+   host: ec2-34-202-7-83.compute-1.amazonaws.com
+   database: da9ht6ul7pamns
+   port: 5432
+   username: daxvltiqnatvhk
+   password: 2f1e4714c91effb11c0b97e5df825b684fa8be967c49eb89890d3e4430e9ec35
