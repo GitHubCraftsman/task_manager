@@ -18,11 +18,15 @@
   <div class='panel-body' id='new_task_<%= dom_id project %>'>
   <%= form_for([project, @task], remote: true) do |f| %>
     <div class='col-md-8'>
-      <span class='glyphicon glyphicon-plus plus pull-right'></span><%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
+      <span class='glyphicon glyphicon-plus plus pull-right'></span><%= f.text_field :name, maxlength: 100, class: 'form-control', placeholder: 'Enter new task' %>
     </div>
     <div class='col-md-2'>
-      <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]), class: 'form-control' %>
-    </div>
+      <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] , ['now', 'now'] , ['later', 'later'] , ['done', 'done']]), class: 'form-control' %>
+	</div>
+     <div class='col-md-2'>
+              <%= f.date_field :date, class: 'form-control', :value => Date.current %>
+            </div>
+    
     <div class='col-md-2'>
       <%= f.submit class: 'btn btn-default new_task_select'%>
       <% end %>

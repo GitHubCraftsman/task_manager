@@ -1,4 +1,18 @@
+
+
 $("#task_<%= @task.id %>").removeClass('done');
-$("#task_<%= @task.id %>").addClass("<%= @task.status%>");
+$("#task_<%= @task.id %>").removeClass('alarm');
+$("#task_<%= @task.id %>").removeClass('new');
+$("#task_<%= @task.id %>").removeClass('now');
+$("#task_<%= @task.id %>").removeClass('later');
+$("#task_<%= @task.id %>").removeClass('in_process');
+
+if ( <%= Date.current %> <= <%= @task.date %>) {
+ $("#task_<%= @task.id %>").addClass("<%= @task.status %> alarm");
+} else {
+ $("#task_<%= @task.id %>").addClass("<%= @task.status%>");
+}
+
+
 $("#task_<%= @task.id %>").html("<%= j (render 'update') %>");
 $('#myModal').modal("hide");

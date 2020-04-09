@@ -1,3 +1,3 @@
-$("#myModal .modal-title").text("Edit task: <%= @task.name %>");
+$("#myModal .modal-title").text("Edit task: <%= @task.name.slice(0..25) %>");
 $("#myModal .modal-body").html("<%= j (render 'edit') %>");
 $('#myModal').modal("show");

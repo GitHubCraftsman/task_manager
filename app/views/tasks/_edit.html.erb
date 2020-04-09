@@ -1,5 +1,6 @@
 <%= form_for :task, url: project_task_path(@task.project, @task), method: :patch, remote: true do |f| %>
-  <%= f.text_field :name %>
-  <%= f.select :status, options_for_select([ "new", "in_process", "done" ], @task.status) %>
+  <%= f.text_field :name, maxlength: 100, size: 66 %>
+  <%= f.select :status, options_for_select([ "new", "in_process", "now", "later", "done" ], @task.status) %>
+  <%= f.date_field :date %>  
   <%= f.submit value: 'update task'%>
 <% end %>

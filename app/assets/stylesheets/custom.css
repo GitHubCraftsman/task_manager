@@ -7,6 +7,10 @@ body{
   color: #5da860;
   
 }
+.col-md-8 {
+   
+    text-align: left;
+}
 .btn-primary {
   color: #a4dda6;
   background-color: #408625;
@@ -29,6 +33,12 @@ select{
   height: 33px;
   background-color: #e7fdd1;
 }
+
+#task_date {
+background-color: #e7fdd1;
+color: #5da860;
+}
+
 .col-md-3.wellcome-message.well {
   
   background: #e7fdd1;
@@ -40,8 +50,12 @@ select{
  
 }
 .new_task input, .new_task select{
-  width: 100%;
+  width: 96%;
 }
+.col-md-8 {
+  width: 50%;
+}
+
 #projects .panel-heading{
   height:70px;
 }
@@ -74,6 +88,10 @@ select{
 td{
   position: relative
 }
+
+.alarm {
+  color: #FF6347;
+}
 tr.done td:before{
 	content: '';
 	position: absolute;
@@ -81,11 +99,9 @@ tr.done td:before{
 	left: 0px;
 	right: 0px;
 	height: 1px;
-	border-top: 2px solid #8bffd8;
+	border-top: 2px solid #00FF00;
 }
-.done{
-  color: #8bffd8;
-}
+
 .login-input{
   margin: 0 auto;
 }

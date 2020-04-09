@@ -1,6 +1,12 @@
-<tr id=<%= dom_id task %> class='row <%= task.status %>'>
+<% if Date.current >= task.date %>
+		        <tr id=<%= dom_id task %> class='row <%= task.status %> alarm'>
+		      <% else %>
+                        <tr id=<%= dom_id task %> class='row <%= task.status %>'>
+                     <% end %>
+
   <td><p><%= task.name %></p></td>
   <td><p><%= task.status %></p></td>
+  <td><p><%= task.date %></p></td>
   <td><%= link_to edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' do %>
         <i class="glyphicon glyphicon-pencil pencil"></i>
       <% end %>

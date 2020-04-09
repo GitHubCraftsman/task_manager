@@ -37,41 +37,51 @@
 
       <div id=<%= dom_id project %> class='panel panel-default'>
 
-          <div class='panel-heading'>
-            <div class='col-md-6'>
-              <span class="glyphicon glyphicon-calendar calendar pull-left"></span>
-              <p class='name pull-left'><%= project.name %></p>
-            </div>
-            <div class='col-md-2 col-md-offset-4'>
-              <%= link_to project_path(project), remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <i class="glyphicon glyphicon-trash trash pull-right"></i>
-              <% end %>
-              <%= link_to edit_project_path(project), remote: true do %>
-                <i class="glyphicon glyphicon-pencil pencil pull-right"></i>
-              <% end %>
-            </div>
-          </div>
+  <div class='panel-heading'>
+    <div class='col-md-6'>
+      <span class="glyphicon glyphicon-calendar calendar pull-left"></span>
+      <p class='name pull-left'><%= project.name %></p>
+    </div>
+    <div class='col-md-2 col-md-offset-4 actions'>
+      <%= link_to project_path(project), remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="glyphicon glyphicon-trash trash pull-right"></i>
+      <% end %>
+      <%= link_to edit_project_path(project), remote: true do %>
+        <i class="glyphicon glyphicon-pencil pencil pull-right"></i>
+      <% end %>
+    </div>
+  </div>
 
-          <div class='panel-body' id='new_task_<%= dom_id project %>'>
-          <%= form_for([project, @task], remote: true) do |f| %>
-            <div class='col-md-8'>
-              <span class='glyphicon glyphicon-plus plus'></span><%= f.text_field :name, class: 'form-control', placeholder: 'Enter new task' %>
+  <div class='panel-body' id='new_task_<%= dom_id project %>'>
+  <%= form_for([project, @task], remote: true) do |f| %>
+    <div class='col-md-8'>
+      <span class='glyphicon glyphicon-plus plus pull-right'></span><%= f.text_field :name, maxlength: 100, class: 'form-control', placeholder: 'Enter new task' %>
+    </div>
+    <div class='col-md-2'>
+      <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] , ['now', 'now'] , ['later', 'later'] , ['done', 'done']]), class: 'form-control' %>
+	</div>
+     <div class='col-md-2'>
+              <%= f.date_field :date, class: 'form-control', :value => Date.current %>
             </div>
-            <div class='col-md-2'>
-              <%= f.select :status, options_for_select([['new', 'new'] , ['in_process', 'in_process'] ,['done', 'done']]), class: 'form-control' %>
-            </div>
-            <div class='col-md-2'>
-              <%= f.submit class: 'btn btn-default new_task_select'%>
-              <% end %>
-            </div>
-          </div>
+    
+    <div class='col-md-2'>
+      <%= f.submit class: 'btn btn-default new_task_select'%>
+      <% end %>
+    </div>
+  </div>
+
 
             <table id='tasks_<%= dom_id project %>' class='table table-hover'>
               <% unless project.tasks.empty? %>
               <% project.tasks.each do |task| %>
-                <tr id=<%= dom_id task %> class='row <%= task.status %>'>
-                  <td><p><%= task.name %></p></td>
+		     <% if Date.current >= task.date %>
+		        <tr id=<%= dom_id task %> class='row <%= task.status %> alarm'>
+		      <% else %>
+                        <tr id=<%= dom_id task %> class='row <%= task.status %>'>
+                     <% end %>
+		  <td><p><%= task.name %></p></td>
                   <td><p><%= task.status %></p></td>
+		   <td><p><%= task.date %></p></td>
                   <td><%= link_to edit_project_task_path(task.project, task ), remote: true, :class => 'delete_task' do %>
                     <i class="glyphicon glyphicon-pencil pencil"></i>
                     <% end %>
