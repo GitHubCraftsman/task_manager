@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-config.action_mailer.default_url_options = { host: 'https://afternoon-peak-58950.herokuapp.com', port: 3000 }
+config.action_mailer.default_url_options = { host: 'https://afternoon-peak-58950.herokuapp.com', port: 5000 }
   # Code is not reloaded between requests.
   config.cache_classes = true
 
