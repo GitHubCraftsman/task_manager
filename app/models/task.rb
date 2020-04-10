@@ -5,9 +5,7 @@ class Task < ApplicationRecord
     validates :status, inclusion: { in: %w(new in_process now later done),
       message: "%{value} is not a valid status" }
   
-     # scope :statuses, -> { Task.joins(:project).where("projects.user_id = @current_user").select(:status).distinct.order(status: :asc) }
-     # scope :statuses, -> { Task.select(:status).distinct.where("projects.user_id = @current_user").order(status: :asc) }
- # scope :statuses, -> { Task.joins(:project).group("tasks.status").having("projects.user_id = @current_user").select(:status)  }    
+       
       scope :statuses, -> { Task.select(:status).distinct.order(status: :asc) }
       scope :count_tasks, -> { Task.joins(:project).group("projects.id").select('projects.name, COUNT(*) as cnt').order("cnt DESC")  }
       scope :count_tasks_name, -> { Task.joins(:project).group("projects.id").order("projects.name ASC").select('projects.name, COUNT(*) as cnt') }
