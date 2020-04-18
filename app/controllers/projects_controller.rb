@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
     end
   
     def show
+      return unless current_user.projects.ids.include?((params[:id]).to_i)
       @project = Project.find params[:id]
       @task = Task.new
     end
@@ -16,6 +17,7 @@ class ProjectsController < ApplicationController
     end
   
     def edit
+      return unless current_user.projects.ids.include?((params[:id]).to_i)
       @project = Project.find(params[:id])
     end
   
@@ -26,11 +28,13 @@ class ProjectsController < ApplicationController
     end
   
     def update
+      return unless current_user.projects.ids.include?((params[:id]).to_i)
       @project = Project.find(params[:id])
       @project.update(project_params)
     end
   
     def destroy
+      return unless current_user.projects.ids.include?((params[:id]).to_i)
       @project = Project.find(params[:id])
       @project.destroy
     end
